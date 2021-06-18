@@ -1,0 +1,129 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# tidymodelsdeploy
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
+<!-- badges: end -->
+
+The goal of tidymodelsdeploy is to ...
+
+## Installation
+
+You can install the released version of tidymodelsdeploy from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("tidymodelsdeploy")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("juliasilge/tidymodelsdeploy")
+```
+
+## Example 1
+
+
+```{r}
+library(tidymodels)
+data("Sacramento")
+
+rf_spec <-
+    rand_forest() %>%
+    set_mode("regression") %>%
+    set_engine("ranger")
+
+rf_fit <-
+    workflow() %>%
+    add_formula(price ~ type + sqft + beds + baths) %>%
+    add_model(rf_spec) %>%
+    fit(Sacramento)
+
+rf_fit
+```
+
+```{r}
+library(tidymodelsdeploy)
+library(pins)
+library(plumber)
+
+model_board <- board_temp()
+model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
+
+pr() %>%
+    pr_model(model_board, "sacramento_rf") %>%
+    pr_run(port = "8088")
+```
+
+
+```{r}
+library(tidymodels)
+data("Sacramento")
+
+new_sac <- Sacramento %>% 
+    slice_sample(n = 20) %>% 
+    select(type, sqft, beds, baths)
+
+predict_api("http://127.0.0.1:9631/predict", new_sac)
+```
+
+
+## Example 2
+
+
+```{r}
+library(tidymodels)
+data(bivariate)
+
+biv_rec <-
+    recipe(Class ~ ., data = bivariate_train) %>%
+    step_BoxCox(all_predictors())%>%
+    step_normalize(all_predictors())
+
+svm_spec <-
+    svm_linear(mode = "classification") %>%
+    set_engine("LiblineaR")
+
+svm_fit <- workflow() %>%
+    add_recipe(biv_rec) %>%
+    add_model(svm_spec) %>%
+    fit(bivariate_train)
+
+library(tidymodelsdeploy)
+library(pins)
+library(plumber)
+
+model_board <- board_temp()
+model_board %>% pin_model(svm_fit, model_id = "biv_svm")
+
+pr() %>%
+    pr_model(model_board, "biv_svm", type = "class") %>%
+    pr_run(port = 8088)
+```
+
+
+```{r}
+library(tidymodels)
+data("bivariate", package = "modeldata")
+new_biv <- dplyr::select(bivariate_val, -Class)
+
+predict_api("http://127.0.0.1:9523/predict", new_biv)
+```
+
+
