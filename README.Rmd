@@ -80,7 +80,7 @@ new_sac <- Sacramento %>%
     slice_sample(n = 20) %>% 
     select(type, sqft, beds, baths)
 
-predict_api("http://127.0.0.1:9631/predict", new_sac)
+predict_api("http://127.0.0.1:8088/predict", new_sac)
 ```
 
 
@@ -123,7 +123,7 @@ library(tidymodels)
 data("bivariate", package = "modeldata")
 new_biv <- dplyr::select(bivariate_val, -Class)
 
-predict_api("http://127.0.0.1:9523/predict", new_biv)
+predict_api("http://127.0.0.1:8088/predict", new_biv)
 ```
 
 
