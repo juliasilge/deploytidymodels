@@ -1,0 +1,40 @@
+Package: tidymodelsdeploy
+Title: Version, Pin, and Deploy Modeling Workflows Trained with 'pins' and
+    'plumber'
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Julia",
+             family = "Silge",
+             role = c("cre", "aut"),
+             email = "julia.silge@rstudio.com",
+             comment = c(ORCID = "0000-0002-3671-836X")),
+      person(given = "RStudio",
+             role = "cph"))
+Description: A trained model workflow can be shared and versioned via
+    'pins', and deployed as an API via 'plumber'. Functions handle both
+    recording and checking the model's input data prototype, and loading
+    the packages needed for prediction.
+License: MIT + file LICENSE
+Imports: 
+    butcher,
+    glue,
+    hardhat,
+    httr,
+    jsonlite,
+    parsnip,
+    pins (>= 0.99.9000),
+    plumber,
+    rlang,
+    tibble,
+    tune,
+    workflows
+Suggests: 
+    testthat (>= 3.0.0),
+    vctrs
+Remotes: 
+    rstudio/pins
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
