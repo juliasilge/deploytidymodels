@@ -37,12 +37,14 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("juliasilge/deploytidymodels")
 ```
 
-## Example 1
+## Example
 
+You can use the [tidymodels](https://www.tidymodels.org/) ecosystem to train a model, with a wide variety of preprocessing and model estimation options.
 
 ```{r}
-library(tidymodels)
-data("Sacramento")
+library(parsnip)
+library(workflows)
+data(Sacramento, package = "modeldata")
 
 rf_spec <-
     rand_forest() %>%
@@ -58,6 +60,8 @@ rf_fit <-
 rf_fit
 ```
 
+You can **version** and **share** your model by [pinning](https://pins.rstudio.com/dev/) it, to a local folder, RStudio Connect, Amazon S3, and more.
+
 ```{r}
 library(deploytidymodels)
 library(pins)
@@ -65,16 +69,22 @@ library(plumber)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
+```
 
+You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
+
+```{r, eval=FALSE}
 pr() %>%
     pr_model(model_board, "sacramento_rf") %>%
     pr_run(port = 8088)
 ```
 
+Make predictions with your deployed model at its endpoint and new data.
 
-```{r}
-library(tidymodels)
-data("Sacramento")
+```{r eval=FALSE}
+library(tidyverse)
+library(deploytidymodels)
+data(Sacramento, package = "modeldata")
 
 new_sac <- Sacramento %>% 
     slice_sample(n = 20) %>% 
@@ -83,48 +93,6 @@ new_sac <- Sacramento %>%
 predict_api("http://127.0.0.1:8088/predict", new_sac)
 ```
 
-
-## Example 2
-
-
-```{r}
-library(tidymodels)
-data(bivariate)
-
-biv_rec <-
-    recipe(Class ~ ., data = bivariate_train) %>%
-    step_BoxCox(all_predictors())%>%
-    step_normalize(all_predictors())
-
-svm_spec <-
-    svm_linear(mode = "classification") %>%
-    set_engine("LiblineaR")
-
-svm_fit <- workflow() %>%
-    add_recipe(biv_rec) %>%
-    add_model(svm_spec) %>%
-    fit(bivariate_train)
-
-library(deploytidymodels)
-library(pins)
-library(plumber)
-
-model_board <- board_temp()
-model_board %>% pin_model(svm_fit, model_id = "biv_svm")
-
-pr() %>%
-    pr_model(model_board, "biv_svm", type = "class") %>%
-    pr_run(port = 8088)
-```
-
-
-```{r}
-library(tidymodels)
-data("bivariate", package = "modeldata")
-new_biv <- dplyr::select(bivariate_test, -Class)
-
-predict_api("http://127.0.0.1:8088/predict", new_biv)
-```
 
 ## Contributing
 
