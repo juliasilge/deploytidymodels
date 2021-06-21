@@ -1,4 +1,4 @@
 library(testthat)
-library(tidymodelsdeploy)
+library(deploytidymodels)
 
-test_check("tidymodelsdeploy")
+test_check("deploytidymodels")

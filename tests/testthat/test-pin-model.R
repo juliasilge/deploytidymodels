@@ -14,25 +14,20 @@ mtcars_wf <- workflow() %>%
 
 test_that("can pin a model", {
     pin_model(b, mtcars_wf, "mtcars_ranger")
-    expect_equal(pin_read(b, "mtcars_ranger"),
-                 butcher::butcher(mtcars_wf))
-    expect_equal(pin_read(b, "mtcars_ranger_ptype"),
-                 vctrs::vec_slice(tibble::as_tibble(mtcars[,2:11]), 0))
+    expect_equal(
+        pin_read(b, "mtcars_ranger"),
+        list(
+            model = butcher::butcher(mtcars_wf),
+            ptype = vctrs::vec_slice(tibble::as_tibble(mtcars[,2:11]), 0)
+        )
+    )
 })
 
 test_that("default metadata for model", {
     pin_model(b, mtcars_wf, "mtcars_ranger")
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, NULL)
-    expect_equal(meta$description, "A ranger regression model")
-})
-
-test_that("default metadata for ptype", {
-    pin_model(b, mtcars_wf, "mtcars_ranger")
-    meta <- pin_meta(b, "mtcars_ranger_ptype")
-    expect_equal(meta$user, list(mode = "regression", engine = "ranger"))
-    expect_equal(meta$description,
-                 "An input data prototype for the mtcars_ranger model")
+    expect_equal(meta$description, "A ranger regression modeling workflow")
 })
 
 test_that("user can supply metadata for model", {

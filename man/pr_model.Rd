@@ -47,7 +47,6 @@ mtcars_wf <- workflow() \%>\%
     add_formula(mpg ~ .) \%>\%
     fit(data = mtcars)
 
-
 model_board \%>\%
     pin_model(mtcars_wf, "mtcars_ranger")
 

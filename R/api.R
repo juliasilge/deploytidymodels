@@ -30,7 +30,6 @@
 #'     add_formula(mpg ~ .) %>%
 #'     fit(data = mtcars)
 #'
-#'
 #' model_board %>%
 #'     pin_model(mtcars_wf, "mtcars_ranger")
 #'
@@ -50,20 +49,43 @@ pr_model <- function(pr,
     board_pins <- pins::pin_list(board)
     if (!model_id %in% board_pins) {
         rlang::abort(glue("Model {model_id} not found"))
-    } else if (!glue("{model_id}_ptype") %in% board_pins) {
-        rlang::abort(glue("Model {model_id}'s data prototype not found"))
     }
 
-    wf <- pins::pin_read(board, model_id)
-    ptype <- pins::pin_read(board, glue("{model_id}_ptype"))
-    tune::load_pkgs(wf)
+    pinned <- pins::pin_read(board, model_id)
+
+    ## TODO: this pkg loading should stay outside of handler but how to extend
+    ## to other models?
+    tune::load_pkgs(pinned$model)
 
     model_handler <- function(req) {
-        new_data <- hardhat::scream(req$body, ptype)
-        predict(wf, new_data = new_data, type = type)
+        handle_model(pinned$model, req, type)
     }
-
     plumber::pr_post(pr, path = path, handler = model_handler, ...)
 }
+
+
+#' Wrapper function for creating model handler function
+#'
+#' @export
+handle_model <- function(x, req, ...)
+    UseMethod("handle_model")
+
+#' @rdname handle_model
+#' @export
+handle_model.default <- function(x, req, ...)
+    rlang::abort("There is no method available to build a model handler for `x`.")
+
+#' @rdname handle_model
+#' @param x A trained model created with [`workflows::workflow()`].
+#' @param req A POST request, with a `body`.
+#' @param ... Other arguments passed from [`pr_model()`].
+#' @export
+handle_model.workflow <- function(x, req, ...) {
+    ellipsis::check_dots_used()
+    args <- list(...)
+    predict(x, new_data = req$body, type = args$type)
+}
+
+
 
 

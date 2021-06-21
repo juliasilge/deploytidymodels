@@ -1,4 +1,4 @@
-Package: tidymodelsdeploy
+Package: deploytidymodels
 Title: Version, Pin, and Deploy Modeling Workflows Trained with 'pins' and
     'plumber'
 Version: 0.0.0.9000
@@ -17,8 +17,8 @@ Description: A trained model workflow can be shared and versioned via
 License: MIT + file LICENSE
 Imports: 
     butcher,
+    ellipsis,
     glue,
-    hardhat,
     httr,
     jsonlite,
     parsnip,

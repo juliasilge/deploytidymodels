@@ -18,7 +18,7 @@ pin_model(
 \item{board}{A pin board, created by \code{\link[pins:board_folder]{pins::board_folder()}},
 \code{\link[pins:board_rsconnect]{pins::board_rsconnect()}}, or other \code{board_} function from the pins package.}
 
-\item{model}{A trained modeling \code{\link[workflows:workflow]{workflows::workflow()}}.}
+\item{model}{A trained model, such as a modeling \code{\link[workflows:workflow]{workflows::workflow()}}.}
 
 \item{model_id}{Model ID or name.}
 
@@ -27,7 +27,7 @@ pin_model(
 
 \item{desc}{A text description of the model; most important for shared
 boards so that others can understand what the model is. If omitted,
-tidymodelsdeploy will generate a brief description of the contents.}
+the package will generate a brief description of the contents.}
 
 \item{metadata}{A list containing additional metadata to store with the pin.
 When retrieving the pin, this will be stored in the \code{user} key, to
@@ -37,13 +37,11 @@ avoid potential clashes with the metadata that pins itself uses.}
 }
 \description{
 Use \code{pin_model()} to pin a trained model workflow to a board of models,
-along with an input prototype for new data and model metadata.
+along with an input prototype for new data and other model metadata.
 }
 \details{
-This function creates \emph{two} pins on the specified \code{board}, one for
-the model object itself and one for the model's input data prototype. The
-naming convention for the model data prototype uses the \code{model_id} plus the
-suffix "_ptype".
+This function creates a pin on the specified \code{board} containing
+two elements, the model object itself and the model's input data prototype.
 }
 \examples{
 
@@ -62,7 +60,6 @@ mtcars_wf <- workflow() \%>\%
 
 
 model_board \%>\% pin_model(mtcars_wf, "mtcars_ranger")
-# notice two pins created
 model_board
 
 }

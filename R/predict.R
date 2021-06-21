@@ -22,6 +22,6 @@ predict_api <- function(endpoint, new_data) {
     msg <- glue("predict: {httr::content(ret)[['message']]}")
     httr::stop_for_status(ret, task = msg)
 
-    ret <- httr::content(ret)
+    ret <- httr::content(ret, simplify = TRUE)
     tibble::as_tibble(ret)
 }

@@ -13,28 +13,28 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tidymodelsdeploy
+# deploytidymodels
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
 <!-- badges: end -->
 
-The goal of tidymodelsdeploy is to ...
+The goal of deploytidymodels is to ...
 
 ## Installation
 
-You can install the released version of tidymodelsdeploy from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of deploytidymodels from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("tidymodelsdeploy")
+install.packages("deploytidymodels")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("juliasilge/tidymodelsdeploy")
+devtools::install_github("juliasilge/deploytidymodels")
 ```
 
 ## Example 1
@@ -59,7 +59,7 @@ rf_fit
 ```
 
 ```{r}
-library(tidymodelsdeploy)
+library(deploytidymodels)
 library(pins)
 library(plumber)
 
@@ -68,7 +68,7 @@ model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
 
 pr() %>%
     pr_model(model_board, "sacramento_rf") %>%
-    pr_run(port = "8088")
+    pr_run(port = 8088)
 ```
 
 
@@ -105,7 +105,7 @@ svm_fit <- workflow() %>%
     add_model(svm_spec) %>%
     fit(bivariate_train)
 
-library(tidymodelsdeploy)
+library(deploytidymodels)
 library(pins)
 library(plumber)
 
@@ -121,7 +121,7 @@ pr() %>%
 ```{r}
 library(tidymodels)
 data("bivariate", package = "modeldata")
-new_biv <- dplyr::select(bivariate_val, -Class)
+new_biv <- dplyr::select(bivariate_test, -Class)
 
 predict_api("http://127.0.0.1:8088/predict", new_biv)
 ```
