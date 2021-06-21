@@ -54,7 +54,7 @@ pr_model <- function(pr,
     pinned <- pins::pin_read(board, model_id)
 
     ## TODO: this pkg loading should stay outside of handler but how to extend
-    ## to other models?
+    ## to other models? we know this will be a pain point
     tune::load_pkgs(pinned$model)
 
     model_handler <- function(req) {

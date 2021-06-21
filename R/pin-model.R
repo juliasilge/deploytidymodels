@@ -1,7 +1,7 @@
-#' Pin a trained modeling workflow to a board of models
+#' Pin a trained model to a board of models
 #'
-#' Use `pin_model()` to pin a trained model workflow to a board of models,
-#' along with an input prototype for new data and other model metadata.
+#' Use `pin_model()` to pin a trained model to a board of models, along with an
+#' input prototype for new data and other model metadata.
 #'
 #' @param board A pin board, created by [pins::board_folder()],
 #' [pins::board_rsconnect()], or other `board_` function from the pins package.

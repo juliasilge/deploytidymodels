@@ -2,7 +2,7 @@
 % Please edit documentation in R/pin-model.R
 \name{pin_model}
 \alias{pin_model}
-\title{Pin a trained modeling workflow to a board of models}
+\title{Pin a trained model to a board of models}
 \usage{
 pin_model(
   board,
@@ -36,8 +36,8 @@ avoid potential clashes with the metadata that pins itself uses.}
 \item{versioned}{Should the model object be versioned? Defaults to \code{TRUE}.}
 }
 \description{
-Use \code{pin_model()} to pin a trained model workflow to a board of models,
-along with an input prototype for new data and other model metadata.
+Use \code{pin_model()} to pin a trained model to a board of models, along with an
+input prototype for new data and other model metadata.
 }
 \details{
 This function creates a pin on the specified \code{board} containing
