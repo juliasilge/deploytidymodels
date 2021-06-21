@@ -33,7 +33,7 @@ svm_fit <- workflow() %>%
 
 ## Pin the model and create the API:
 
-```{r}
+```{r eval=FALSE}
 library(deploytidymodels)
 library(pins)
 library(plumber)
@@ -48,7 +48,7 @@ pr() %>%
 
 ## Make predictions from API:
 
-```{r}
+```{r eval=FALSE}
 library(tidyverse)
 data("bivariate", package = "modeldata")
 new_biv <- dplyr::select(bivariate_test, -Class)

@@ -1,5 +1,5 @@
 Package: deploytidymodels
-Title: Version, Pin, and Deploy Modeling Workflows Trained with 'pins' and
+Title: Version, Pin, and Deploy Modeling Workflows with 'pins' and
     'plumber'
 Version: 0.0.0.9000
 Authors@R: 
