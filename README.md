@@ -30,7 +30,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("juliasilge/deploytidymodels")
+devtools::install_github("tidymodels/deploytidymodels")
 ```
 
 ## Example
@@ -54,31 +54,6 @@ rf_fit <-
     add_formula(price ~ type + sqft + beds + baths) %>%
     add_model(rf_spec) %>%
     fit(Sacramento)
-
-rf_fit
-#> ══ Workflow [trained] ══════════════════════════════════════════════════════════
-#> Preprocessor: Formula
-#> Model: rand_forest()
-#> 
-#> ── Preprocessor ────────────────────────────────────────────────────────────────
-#> price ~ type + sqft + beds + baths
-#> 
-#> ── Model ───────────────────────────────────────────────────────────────────────
-#> Ranger result
-#> 
-#> Call:
-#>  ranger::ranger(x = maybe_data_frame(x), y = y, num.threads = 1,      verbose = FALSE, seed = sample.int(10^5, 1)) 
-#> 
-#> Type:                             Regression 
-#> Number of trees:                  500 
-#> Sample size:                      932 
-#> Number of independent variables:  4 
-#> Mtry:                             2 
-#> Target node size:                 5 
-#> Variable importance mode:         none 
-#> Splitrule:                        variance 
-#> OOB prediction error (MSE):       7072879981 
-#> R squared (OOB):                  0.5886486
 ```
 
 You can **version** and **share** your model by
@@ -88,11 +63,10 @@ Connect, Amazon S3, and more.
 ``` r
 library(deploytidymodels)
 library(pins)
-library(plumber)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210621T233416Z-8ee39'
+#> Creating new version '20210621T233620Z-71835'
 ```
 
 You can **deploy** your pinned model via a [Plumber
@@ -100,6 +74,8 @@ API](https://www.rplumber.io/), which can be [hosted in a variety of
 ways](https://www.rplumber.io/articles/hosting.html).
 
 ``` r
+library(plumber)
+
 pr() %>%
     pr_model(model_board, "sacramento_rf") %>%
     pr_run(port = 8088)

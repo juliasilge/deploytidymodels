@@ -34,7 +34,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("juliasilge/deploytidymodels")
+devtools::install_github("tidymodels/deploytidymodels")
 ```
 
 ## Example
@@ -56,8 +56,6 @@ rf_fit <-
     add_formula(price ~ type + sqft + beds + baths) %>%
     add_model(rf_spec) %>%
     fit(Sacramento)
-
-rf_fit
 ```
 
 You can **version** and **share** your model by [pinning](https://pins.rstudio.com/dev/) it, to a local folder, RStudio Connect, Amazon S3, and more.
@@ -65,7 +63,6 @@ You can **version** and **share** your model by [pinning](https://pins.rstudio.c
 ```{r}
 library(deploytidymodels)
 library(pins)
-library(plumber)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
@@ -74,6 +71,8 @@ model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
 You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
 
 ```{r, eval=FALSE}
+library(plumber)
+
 pr() %>%
     pr_model(model_board, "sacramento_rf") %>%
     pr_run(port = 8088)
