@@ -24,10 +24,10 @@ The goal of deploytidymodels is to provide fluent tooling to version, share, and
 
 ## Installation
 
-You can install the released version of deploytidymodels from [CRAN](https://CRAN.R-project.org) with:
+~~You can install the released version of deploytidymodels from [CRAN](https://CRAN.R-project.org) with:~~
 
 ``` r
-~~install.packages("deploytidymodels")~~
+install.packages("deploytidymodels") ## not yet
 ```
 
 And the development version from [GitHub](https://github.com/) with:

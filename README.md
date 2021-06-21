@@ -19,11 +19,11 @@ packages needed for prediction.
 
 ## Installation
 
-You can install the released version of deploytidymodels from
-[CRAN](https://CRAN.R-project.org) with:
+~~You can install the released version of deploytidymodels from
+[CRAN](https://CRAN.R-project.org) with:~~
 
 ``` r
-~~install.packages("deploytidymodels")~~
+install.packages("deploytidymodels") ## not yet
 ```
 
 And the development version from [GitHub](https://github.com/) with:
@@ -77,8 +77,8 @@ rf_fit
 #> Target node size:                 5 
 #> Variable importance mode:         none 
 #> Splitrule:                        variance 
-#> OOB prediction error (MSE):       7091410811 
-#> R squared (OOB):                  0.5875709
+#> OOB prediction error (MSE):       7072879981 
+#> R squared (OOB):                  0.5886486
 ```
 
 You can **version** and **share** your model by
@@ -92,7 +92,7 @@ library(plumber)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210621T233246Z-d5e46'
+#> Creating new version '20210621T233416Z-8ee39'
 ```
 
 You can **deploy** your pinned model via a [Plumber
