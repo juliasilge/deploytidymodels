@@ -52,15 +52,43 @@ pr_model <- function(pr,
     }
 
     pinned <- pins::pin_read(board, model_id)
+    meta <- pins::pin_meta(board, model_id)
 
     ## TODO: this pkg loading should stay outside of handler but how to extend
     ## to other models? we know this will be a pain point
     tune::load_pkgs(pinned$model)
+    ptype <- pinned$ptype
+    ptype_prop <- map_ptype(ptype)
+
+
+    api_spec <- function(spec) {
+        spec$info$title <- glue::glue("{model_id} model API")
+        spec$info$description <- meta$description
+        request_body <- list(content = list(
+            `application/json` = list(
+                schema = list(
+                    type = "object",
+                    properties = ptype_prop
+                )
+            )
+        ))
+
+        orig_post <- spec[["paths"]][[path]][["post"]]
+        spec$paths[[path]]$post <- list(
+            summary = glue::glue("Return predictions from model using {dim(ptype)[[2]]} features"),
+            requestBody = request_body,
+            responses = orig_post$responses
+        )
+        spec
+    }
 
     model_handler <- function(req) {
         handle_model(pinned$model, req, type)
     }
-    plumber::pr_post(pr, path = path, handler = model_handler, ...)
+
+    pr <- plumber::pr_post(pr, path = path, handler = model_handler, ...)
+    pr <- plumber::pr_set_api_spec(pr, api = api_spec)
+    pr
 }
 
 
@@ -86,6 +114,16 @@ handle_model.workflow <- function(x, req, ...) {
     predict(x, new_data = req$body, type = args$type)
 }
 
+
+map_ptype <- function(ptype) {
+    ret <- as.list(ptype)
+    ret <- map(ret, ~ switch(class(.),
+                             numeric = "number",
+                             integer = "integer",
+                             logical = "boolean",
+                             "string"))
+    map(ret, ~list(type = .))
+}
 
 
 
