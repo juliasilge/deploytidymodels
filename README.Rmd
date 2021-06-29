@@ -44,6 +44,7 @@ You can use the [tidymodels](https://www.tidymodels.org/) ecosystem to train a m
 ```{r}
 library(parsnip)
 library(workflows)
+library(ranger)
 data(Sacramento, package = "modeldata")
 
 rf_spec <-
