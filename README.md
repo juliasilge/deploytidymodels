@@ -13,9 +13,10 @@ status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-p
 
 The goal of deploytidymodels is to provide fluent tooling to version,
 share, and deploy a trained model
-[workflow](https://workflows.tidymodels.org/). Functions handle both
-recording and checking the model’s input data prototype, and loading the
-packages needed for prediction.
+[workflow](https://workflows.tidymodels.org/) using the
+[modelops](https://rstudio.github.io/modelops/) framework. Functions
+handle both recording and checking the model’s input data prototype, and
+loading the packages needed for prediction.
 
 ## Installation
 
@@ -66,7 +67,7 @@ library(pins)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210709T232858Z-27487'
+#> Creating new version '20210709T233403Z-51c1b'
 ```
 
 You can **deploy** your pinned model via a [Plumber

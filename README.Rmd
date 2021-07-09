@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
 <!-- badges: end -->
 
-The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/). Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
+The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/) using the [modelops](https://rstudio.github.io/modelops/) framework. Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
 
 ## Installation
 
