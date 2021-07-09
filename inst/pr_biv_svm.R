@@ -25,3 +25,4 @@ model_board %>% pin_model(svm_fit, model_id = "biv_svm")
 pr() %>%
     pr_model(model_board, "julia.silge/biv_svm", type = "class") %>%
     pr_run(port = 8088)
+

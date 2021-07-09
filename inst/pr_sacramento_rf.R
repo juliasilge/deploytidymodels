@@ -23,4 +23,4 @@ model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
 
 pr() %>%
     pr_model(model_board, "sacramento_rf") %>%
-    pr_run()
+    pr_run(port = 8088)
