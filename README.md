@@ -66,7 +66,7 @@ library(pins)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210621T233620Z-71835'
+#> Creating new version '20210709T232858Z-27487'
 ```
 
 You can **deploy** your pinned model via a [Plumber
@@ -81,18 +81,26 @@ pr() %>%
     pr_run(port = 8088)
 ```
 
-Make predictions with your deployed model at its endpoint and new data.
+Make predictions with your deployed model by creating an endpoint
+object:
+
+``` r
+endpoint <- model_endpoint("http://127.0.0.1:8088/predict")
+endpoint
+#> A model API endpoint for prediction:
+#> http://127.0.0.1:8088/predict
+```
+
+A model API endpoint deployed with `pr_model()` will return predictions
+with appropriate new data.
 
 ``` r
 library(tidyverse)
-library(deploytidymodels)
-data(Sacramento, package = "modeldata")
-
 new_sac <- Sacramento %>% 
     slice_sample(n = 20) %>% 
     select(type, sqft, beds, baths)
 
-predict_api("http://127.0.0.1:8088/predict", new_sac)
+predict(endpoint, new_sac)
 ```
 
 ## Contributing

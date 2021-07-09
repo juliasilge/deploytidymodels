@@ -78,18 +78,22 @@ pr() %>%
     pr_run(port = 8088)
 ```
 
-Make predictions with your deployed model at its endpoint and new data.
+Make predictions with your deployed model by creating an endpoint object:
+
+```{r}
+endpoint <- model_endpoint("http://127.0.0.1:8088/predict")
+endpoint
+```
+
+A model API endpoint deployed with `pr_model()` will return predictions with appropriate new data.
 
 ```{r eval=FALSE}
 library(tidyverse)
-library(deploytidymodels)
-data(Sacramento, package = "modeldata")
-
 new_sac <- Sacramento %>% 
     slice_sample(n = 20) %>% 
     select(type, sqft, beds, baths)
 
-predict_api("http://127.0.0.1:8088/predict", new_sac)
+predict(endpoint, new_sac)
 ```
 
 
