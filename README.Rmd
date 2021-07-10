@@ -87,15 +87,37 @@ endpoint
 
 A model API endpoint deployed with `pr_model()` will return predictions with appropriate new data.
 
-```{r eval=FALSE}
+``` r
 library(tidyverse)
 new_sac <- Sacramento %>% 
     slice_sample(n = 20) %>% 
     select(type, sqft, beds, baths)
 
 predict(endpoint, new_sac)
+#> # A tibble: 20 x 1
+#>      .pred
+#>      <dbl>
+#>  1 165042.
+#>  2 212461.
+#>  3 119008.
+#>  4 201752.
+#>  5 223096.
+#>  6 115696.
+#>  7 191262.
+#>  8 211706.
+#>  9 259336.
+#> 10 206826.
+#> 11 234952.
+#> 12 221993.
+#> 13 204983.
+#> 14 548052.
+#> 15 151186.
+#> 16 299365.
+#> 17 213439.
+#> 18 287993.
+#> 19 272017.
+#> 20 226629.
 ```
-
 
 ## Contributing
 

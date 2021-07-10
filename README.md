@@ -67,7 +67,7 @@ library(pins)
 
 model_board <- board_temp()
 model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210709T233403Z-51c1b'
+#> Creating new version '20210710T002310Z-99f08'
 ```
 
 You can **deploy** your pinned model via a [Plumber
@@ -102,6 +102,29 @@ new_sac <- Sacramento %>%
     select(type, sqft, beds, baths)
 
 predict(endpoint, new_sac)
+#> # A tibble: 20 x 1
+#>      .pred
+#>      <dbl>
+#>  1 165042.
+#>  2 212461.
+#>  3 119008.
+#>  4 201752.
+#>  5 223096.
+#>  6 115696.
+#>  7 191262.
+#>  8 211706.
+#>  9 259336.
+#> 10 206826.
+#> 11 234952.
+#> 12 221993.
+#> 13 204983.
+#> 14 548052.
+#> 15 151186.
+#> 16 299365.
+#> 17 213439.
+#> 18 287993.
+#> 19 272017.
+#> 20 226629.
 ```
 
 ## Contributing
