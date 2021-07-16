@@ -2,6 +2,11 @@ library(deploytidymodels)
 library(pins)
 library(plumber)
 
+library(workflows)  ## eventually we will be able to extract all these from the model
+library(recipes)
+library(parsnip)
+library(LiblineaR)
+
 model_board <- board_rsconnect()
 
 #* @plumber
