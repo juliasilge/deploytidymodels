@@ -11,7 +11,15 @@ handle_model.workflow <- function(x, ...) {
         predict(x, new_data = req$body, type = args$type)
     }
 
-    plumber::pr_post(pr = args$pr, path = args$path, handler = predict_handler)
+    modify_spec <- function(spec) {
+        api_spec(spec, args)
+    }
+
+    pr <- args$pr
+    pr <- plumber::pr_set_debug(pr, debug = args$debug)
+    pr <- plumber::pr_post(pr, path = args$path, handler = predict_handler)
+    pr <- plumber::pr_set_api_spec(pr, api = modify_spec)
+    pr
 }
 
 

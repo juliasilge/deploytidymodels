@@ -7,6 +7,7 @@
 \alias{pin_model}
 \alias{pr_model}
 \alias{handle_model}
+\alias{api_spec}
 \alias{model_endpoint}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -15,6 +16,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{modelops}{\code{\link[modelops]{handle_model}}, \code{\link[modelops]{model_endpoint}}, \code{\link[modelops]{model_pinner}}, \code{\link[modelops]{pin_model}}, \code{\link[modelops]{pr_model}}}
+  \item{modelops}{\code{\link[modelops]{api_spec}}, \code{\link[modelops]{handle_model}}, \code{\link[modelops]{model_endpoint}}, \code{\link[modelops]{model_pinner}}, \code{\link[modelops]{pin_model}}, \code{\link[modelops]{pr_model}}}
 }}
 

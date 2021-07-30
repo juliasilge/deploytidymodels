@@ -24,6 +24,10 @@ modelops::pr_model
 #' @export
 modelops::handle_model
 
+#' @importFrom modelops api_spec
+#' @export
+modelops::api_spec
+
 #' @importFrom modelops model_endpoint
 #' @export
 modelops::model_endpoint
