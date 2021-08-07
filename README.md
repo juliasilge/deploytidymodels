@@ -37,15 +37,11 @@ library(parsnip)
 library(workflows)
 data(Sacramento, package = "modeldata")
 
-rf_spec <-
-    rand_forest() %>%
-    set_mode("regression") %>%
-    set_engine("ranger")
+rf_spec <- rand_forest(mode = "regression")
+rf_form <- price ~ type + sqft + beds + baths
 
-rf_fit <-
-    workflow() %>%
-    add_formula(price ~ type + sqft + beds + baths) %>%
-    add_model(rf_spec) %>%
+rf_fit <- 
+    workflow(rf_form, rf_spec) %>%
     fit(Sacramento)
 ```
 
@@ -59,7 +55,7 @@ library(pins)
 model_board <- board_temp()
 m <- modelops(rf_fit, "sacramento_rf", model_board)
 modelops_pin_write(m)
-#> Creating new version '20210807T050136Z-22394'
+#> Creating new version '20210807T050434Z-10b0d'
 ```
 
 You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
