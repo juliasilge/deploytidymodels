@@ -19,8 +19,9 @@ library(pins)
 library(plumber)
 
 model_board <- board_temp()
-model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
+m <- modelops(rf_fit, "sacramento_rf", model_board)
+modelops_pin_write(m)
 
 pr() %>%
-    pr_model(model_board, "sacramento_rf", debug = TRUE) %>%
+    modelops_pr_predict(m, debug = TRUE) %>%
     pr_run(port = 8088)

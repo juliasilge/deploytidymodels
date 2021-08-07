@@ -3,12 +3,13 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{model_pinner}
-\alias{pin_model}
-\alias{pr_model}
-\alias{handle_model}
+\alias{modelops}
+\alias{modelops_pin_write}
+\alias{modelops_pr_predict}
+\alias{handler_startup}
+\alias{handler_predict}
 \alias{api_spec}
-\alias{model_endpoint}
+\alias{modelops_endpoint}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -16,6 +17,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{modelops}{\code{\link[modelops]{api_spec}}, \code{\link[modelops]{handle_model}}, \code{\link[modelops]{model_endpoint}}, \code{\link[modelops]{model_pinner}}, \code{\link[modelops]{pin_model}}, \code{\link[modelops]{pr_model}}}
+  \item{modelops}{\code{\link[modelops]{api_spec}}, \code{\link[modelops]{handler_predict}}, \code{\link[modelops:handler_predict]{handler_startup}}, \code{\link[modelops]{modelops}}, \code{\link[modelops]{modelops_endpoint}}, \code{\link[modelops]{modelops_pin_write}}, \code{\link[modelops]{modelops_pr_predict}}}
 }}
 

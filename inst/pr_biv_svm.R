@@ -19,10 +19,11 @@ library(deploytidymodels)
 library(pins)
 library(plumber)
 
-model_board <- board_rsconnect()
-model_board %>% pin_model(svm_fit, model_id = "biv_svm")
+model_board <- board_temp()
+m <- modelops(svm_fit, "biv_svm", model_board)
+modelops_pin_write(m)
 
 pr() %>%
-    pr_model(model_board, "julia.silge/biv_svm", type = "class") %>%
+    modelops_pr_predict(m, type = "class") %>%
     pr_run(port = 8088)
 

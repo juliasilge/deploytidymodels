@@ -12,8 +12,10 @@ mtcars_wf <- workflow() %>%
     add_formula(mpg ~ .) %>%
     fit(data = mtcars)
 
+m <- modelops(mtcars_wf, "mtcars_ranger", b)
+
 test_that("can pin a model", {
-    pin_model(b, mtcars_wf, "mtcars_ranger")
+    modelops_pin_write(m)
     expect_equal(
         pin_read(b, "mtcars_ranger"),
         list(
@@ -24,16 +26,17 @@ test_that("can pin a model", {
 })
 
 test_that("default metadata for model", {
-    pin_model(b, mtcars_wf, "mtcars_ranger")
+    modelops_pin_write(m)
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, NULL)
     expect_equal(meta$description, "A ranger regression modeling workflow")
 })
 
 test_that("user can supply metadata for model", {
-    pin_model(b, mtcars_wf, "mtcars_ranger",
-              desc = "Random forest for mtcars",
-              metadata = list(metrics = 1:10))
+    m <- modelops(mtcars_wf, "mtcars_ranger", b,
+                  desc = "Random forest for mtcars",
+                  metadata = list(metrics = 1:10))
+    modelops_pin_write(m)
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, list(metrics = 1:10))
     expect_equal(meta$description, "Random forest for mtcars")

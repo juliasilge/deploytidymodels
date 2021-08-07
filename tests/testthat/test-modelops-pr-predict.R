@@ -13,10 +13,11 @@ mtcars_wf <- workflow() %>%
     add_formula(mpg ~ .) %>%
     fit(data = mtcars)
 
-pin_model(b, mtcars_wf, "mtcars_ranger")
+m <- modelops(mtcars_wf, "mtcars_ranger", b)
+modelops_pin_write(m)
 
 test_that("default endpoint", {
-  p <- pr() %>% pr_model(b, "mtcars_ranger")
+  p <- pr() %>% modelops_pr_predict(m)
   ep <- p$endpoints[[1]][[1]]
   expect_equal(ep$verbs, c("POST"))
   expect_equal(ep$path, "/predict")

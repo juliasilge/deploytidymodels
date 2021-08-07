@@ -1,27 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 # deploytidymodels
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
 <!-- badges: end -->
 
-The goal of deploytidymodels is to provide fluent tooling to version,
-share, and deploy a trained model
-[workflow](https://workflows.tidymodels.org/) using the
-[modelops](https://rstudio.github.io/modelops/) framework. Functions
-handle both recording and checking the model’s input data prototype, and
-loading the packages needed for prediction.
+The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/) using the [modelops](https://rstudio.github.io/modelops/) framework. Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
 
 ## Installation
 
-~~You can install the released version of deploytidymodels from
-[CRAN](https://CRAN.R-project.org) with:~~
+~~You can install the released version of deploytidymodels from [CRAN](https://CRAN.R-project.org) with:~~
 
 ``` r
 install.packages("deploytidymodels") ## not yet
@@ -36,11 +29,10 @@ devtools::install_github("tidymodels/deploytidymodels")
 
 ## Example
 
-You can use the [tidymodels](https://www.tidymodels.org/) ecosystem to
-train a model, with a wide variety of preprocessing and model estimation
-options.
+You can use the [tidymodels](https://www.tidymodels.org/) ecosystem to train a model, with a wide variety of preprocessing and model estimation options.
 
-``` r
+
+```r
 library(parsnip)
 library(workflows)
 data(Sacramento, package = "modeldata")
@@ -57,43 +49,42 @@ rf_fit <-
     fit(Sacramento)
 ```
 
-You can **version** and **share** your model by
-[pinning](https://pins.rstudio.com/dev/) it, to a local folder, RStudio
-Connect, Amazon S3, and more.
+You can **version** and **share** your model by [pinning](https://pins.rstudio.com/dev/) it, to a local folder, RStudio Connect, Amazon S3, and more.
 
-``` r
+
+```r
 library(deploytidymodels)
 library(pins)
 
 model_board <- board_temp()
-model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
-#> Creating new version '20210710T002310Z-99f08'
+m <- modelops(rf_fit, "sacramento_rf", model_board)
+modelops_pin_write(m)
+#> Creating new version '20210807T050136Z-22394'
 ```
 
-You can **deploy** your pinned model via a [Plumber
-API](https://www.rplumber.io/), which can be [hosted in a variety of
-ways](https://www.rplumber.io/articles/hosting.html).
+You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
 
-``` r
+
+```r
 library(plumber)
 
 pr() %>%
-    pr_model(model_board, "sacramento_rf") %>%
+    modelops_pr_predict(m) %>%
     pr_run(port = 8088)
 ```
 
-Make predictions with your deployed model by creating an endpoint
-object:
+Make predictions with your deployed model by creating an endpoint object:
 
-``` r
-endpoint <- model_endpoint("http://127.0.0.1:8088/predict")
+
+```r
+endpoint <- modelops_endpoint("http://127.0.0.1:8088/predict")
 endpoint
-#> A model API endpoint for prediction:
+#> 
+#> ── A model API endpoint for prediction: 
 #> http://127.0.0.1:8088/predict
 ```
 
-A model API endpoint deployed with `pr_model()` will return predictions
-with appropriate new data.
+A model API endpoint deployed with `pr_model()` will return predictions with appropriate new data.
 
 ``` r
 library(tidyverse)
@@ -129,22 +120,12 @@ predict(endpoint, new_sac)
 
 ## Contributing
 
-This project is released with a [Contributor Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+This project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
--   For questions and discussions about tidymodels packages, modeling,
-    and machine learning, please [post on RStudio
-    Community](https://community.rstudio.com/new-topic?category_id=15&tags=tidymodels,question).
+- For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on RStudio Community](https://community.rstudio.com/new-topic?category_id=15&tags=tidymodels,question).
 
--   If you think you have encountered a bug, please [submit an
-    issue](https://github.com/tidymodels/deploytidymodels/issues).
+- If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/deploytidymodels/issues).
 
--   Either way, learn how to create and share a
-    [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
-    (a minimal, reproducible example), to clearly communicate about your
-    code.
+- Either way, learn how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal, reproducible example), to clearly communicate about your code.
 
--   Check out further details on [contributing guidelines for tidymodels
-    packages](https://www.tidymodels.org/contribute/) and [how to get
-    help](https://www.tidymodels.org/help/).
+- Check out further details on [contributing guidelines for tidymodels packages](https://www.tidymodels.org/contribute/) and [how to get help](https://www.tidymodels.org/help/).

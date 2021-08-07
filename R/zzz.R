@@ -1,7 +1,7 @@
 # nocov start
 
 .onLoad <- function(...) {
-    s3_register("modelops::predict", "model_endpoint")
+    s3_register("modelops::predict", "modelops_endpoint")
 }
 
 # nocov end

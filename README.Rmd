@@ -65,7 +65,8 @@ library(deploytidymodels)
 library(pins)
 
 model_board <- board_temp()
-model_board %>% pin_model(rf_fit, model_id = "sacramento_rf")
+m <- modelops(rf_fit, "sacramento_rf", model_board)
+modelops_pin_write(m)
 ```
 
 You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
@@ -74,14 +75,14 @@ You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io
 library(plumber)
 
 pr() %>%
-    pr_model(model_board, "sacramento_rf") %>%
+    modelops_pr_predict(m) %>%
     pr_run(port = 8088)
 ```
 
 Make predictions with your deployed model by creating an endpoint object:
 
 ```{r}
-endpoint <- model_endpoint("http://127.0.0.1:8088/predict")
+endpoint <- modelops_endpoint("http://127.0.0.1:8088/predict")
 endpoint
 ```
 

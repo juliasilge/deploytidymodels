@@ -8,29 +8,33 @@
 
 # ------------------------------------------------------------------------------
 
-#' @importFrom modelops model_pinner
+#' @importFrom modelops modelops
 #' @export
-modelops::model_pinner
+modelops::modelops
 
-#' @importFrom modelops pin_model
+#' @importFrom modelops modelops_pin_write
 #' @export
-modelops::pin_model
+modelops::modelops_pin_write
 
-#' @importFrom modelops pr_model
+#' @importFrom modelops modelops_pr_predict
 #' @export
-modelops::pr_model
+modelops::modelops_pr_predict
 
-#' @importFrom modelops handle_model
+#' @importFrom modelops handler_startup
 #' @export
-modelops::handle_model
+modelops::handler_startup
+
+#' @importFrom modelops handler_predict
+#' @export
+modelops::handler_predict
 
 #' @importFrom modelops api_spec
 #' @export
 modelops::api_spec
 
-#' @importFrom modelops model_endpoint
+#' @importFrom modelops modelops_endpoint
 #' @export
-modelops::model_endpoint
+modelops::modelops_endpoint
 
 # ------------------------------------------------------------------------------
 
