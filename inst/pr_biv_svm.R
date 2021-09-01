@@ -24,6 +24,6 @@ m <- modelops(svm_fit, "biv_svm", model_board)
 modelops_pin_write(m)
 
 pr() %>%
-    modelops_pr_predict(m, type = "class") %>%
+    modelops_pr_predict(m, type = "class", debug = TRUE) %>%
     pr_run(port = 8088)
 

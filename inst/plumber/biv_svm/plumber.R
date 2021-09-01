@@ -7,11 +7,11 @@ library(recipes)
 library(parsnip)
 library(LiblineaR)
 
-model_board <- board_rsconnect(server = "https://colorado.rstudio.com/rsc")
-m <- model_board <- pin_read("julia.silge/biv_svm")
+model_board <- board_rsconnect()
+m <- model_board %>% modelops_pin_read("julia.silge/biv_svm")
 
 #* @plumber
 function(pr) {
     pr %>%
-        modelops_pr_predict(m, type = "class")
+        modelops_pr_predict(m, type = "class", debug = TRUE)
 }
