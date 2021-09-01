@@ -9,7 +9,7 @@
   model_name,
   board,
   desc = NULL,
-  metadata = NULL,
+  metadata = list(),
   ptype = TRUE,
   versioned = TRUE
 )

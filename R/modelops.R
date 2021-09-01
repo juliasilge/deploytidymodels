@@ -3,14 +3,14 @@
 #' A [modelops::modelops()] object collects the information needed to store, version,
 #' and deploy a trained model.
 #'
-#' @param model A trained model created with [`workflows::workflow()`].
+#' @param model A trained model created with [workflows::workflow()].
 #' @inheritParams modelops::modelops
 #' @export
 modelops.workflow <- function(model,
                         model_name,
                         board,
                         desc = NULL,
-                        metadata = NULL,
+                        metadata = list(),
                         ptype = TRUE,
                         versioned = TRUE) {
 
@@ -36,7 +36,7 @@ modelops.workflow <- function(model,
         model = model,
         model_name = model_name,
         board = board,
-        desc = desc,
+        desc = as.character(desc),
         metadata = metadata,
         ptype = ptype,
         versioned = versioned

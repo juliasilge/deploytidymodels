@@ -28,7 +28,7 @@ test_that("can pin a model", {
 test_that("default metadata for model", {
     modelops_pin_write(m)
     meta <- pin_meta(b, "mtcars_ranger")
-    expect_equal(meta$user, NULL)
+    expect_equal(meta$user, list())
     expect_equal(meta$description, "A ranger regression modeling workflow")
 })
 
@@ -40,4 +40,12 @@ test_that("user can supply metadata for model", {
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, list(metrics = 1:10))
     expect_equal(meta$description, "Random forest for mtcars")
+})
+
+test_that("can read a pinned model", {
+    modelops_pin_write(m)
+    expect_equal(
+        m1 <- modelops_pin_read(b, "mtcars_ranger"),
+        m
+    )
 })

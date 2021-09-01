@@ -16,6 +16,10 @@ modelops::modelops
 #' @export
 modelops::modelops_pin_write
 
+#' @importFrom modelops modelops_pin_read
+#' @export
+modelops::modelops_pin_read
+
 #' @importFrom modelops modelops_pr_predict
 #' @export
 modelops::modelops_pr_predict
