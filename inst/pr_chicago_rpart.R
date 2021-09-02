@@ -1,4 +1,4 @@
-## to demonstrate problems with data types at prediction time
+## to check for problems with data types at prediction time
 
 library(tidymodels)
 data(Chicago)

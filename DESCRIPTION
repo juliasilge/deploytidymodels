@@ -10,10 +10,10 @@ Authors@R:
              comment = c(ORCID = "0000-0002-3671-836X")),
       person(given = "RStudio",
              role = "cph"))
-Description: A trained 'tidymodels' workflow can be shared and versioned via
-    'pins', and deployed as an API via 'plumber'. Functions handle both
-    recording and checking the model's input data prototype, and loading
-    the packages needed for prediction.
+Description: A trained 'tidymodels' workflow can be shared and versioned
+    via 'pins', and deployed as an API via 'plumber'. Functions handle
+    both recording and checking the model's input data prototype, and
+    loading the packages needed for prediction.
 License: MIT + file LICENSE
 Imports: 
     butcher,
@@ -22,17 +22,20 @@ Imports:
     modelops,
     pins (>= 0.99.9000),
     plumber,
+    readr,
     rlang,
     tune,
     workflows
 Suggests: 
-    rmarkdown,
     knitr,
     modeldata,
     parsnip,
+    rmarkdown,
     testthat (>= 3.0.0),
     tibble,
     vctrs
+VignetteBuilder: 
+    knitr
 Remotes: 
     juliasilge/modelops,
     rstudio/pins
@@ -41,4 +44,3 @@ Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
-VignetteBuilder: knitr
