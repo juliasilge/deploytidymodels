@@ -10,6 +10,7 @@
 \alias{handler_startup}
 \alias{handler_predict}
 \alias{api_spec}
+\alias{modelops_slice_zero}
 \alias{modelops_endpoint}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -18,6 +19,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{modelops}{\code{\link[modelops]{api_spec}}, \code{\link[modelops]{handler_predict}}, \code{\link[modelops:handler_predict]{handler_startup}}, \code{\link[modelops]{modelops}}, \code{\link[modelops]{modelops_endpoint}}, \code{\link[modelops:modelops_pin_write]{modelops_pin_read}}, \code{\link[modelops]{modelops_pin_write}}, \code{\link[modelops]{modelops_pr_predict}}}
+  \item{modelops}{\code{\link[modelops]{api_spec}}, \code{\link[modelops]{handler_predict}}, \code{\link[modelops:handler_predict]{handler_startup}}, \code{\link[modelops]{modelops}}, \code{\link[modelops]{modelops_endpoint}}, \code{\link[modelops:modelops_pin_write]{modelops_pin_read}}, \code{\link[modelops]{modelops_pin_write}}, \code{\link[modelops]{modelops_pr_predict}}, \code{\link[modelops:modelops_create_ptype]{modelops_slice_zero}}}
 }}
 

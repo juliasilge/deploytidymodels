@@ -6,3 +6,4 @@
 ^\.github$
 ^vignettes/articles$
 ^inst/rsconnect$
+^inst/plumber$

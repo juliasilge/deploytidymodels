@@ -32,7 +32,9 @@ When retrieving the pin, this will be stored in the \code{user} key, to
 avoid potential clashes with the metadata that pins itself uses.}
 
 \item{ptype}{Should an input data prototype be stored with the model?
-Defaults to \code{TRUE}.}
+The options are \code{TRUE} (the default, which stores a zero-row slice of the
+training data), \code{FALSE} (no input data prototype for checking), or a
+dataframe.}
 
 \item{versioned}{Should the model object be versioned? Defaults to \code{TRUE}.}
 }

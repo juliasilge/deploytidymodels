@@ -36,6 +36,10 @@ modelops::handler_predict
 #' @export
 modelops::api_spec
 
+#' @importFrom modelops modelops_slice_zero
+#' @export
+modelops::modelops_slice_zero
+
 #' @importFrom modelops modelops_endpoint
 #' @export
 modelops::modelops_endpoint

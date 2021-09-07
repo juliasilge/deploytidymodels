@@ -19,13 +19,7 @@ modelops.workflow <- function(model,
     }
 
     model <- butcher::butcher(model)
-
-    if (ptype) {
-        mold <- workflows::extract_mold(model)
-        ptype <- mold$blueprint$ptypes$predictors
-    } else {
-        ptype <- NULL
-    }
+    ptype <- modelops::modelops_create_ptype(model, ptype)
 
     if (rlang::is_null(desc)) {
         spec <- workflows::pull_workflow_spec(model)
@@ -42,3 +36,11 @@ modelops.workflow <- function(model,
         versioned = versioned
     )
 }
+
+
+#' @export
+modelops_slice_zero.workflow <- function(model, ...) {
+    mold <- workflows::extract_mold(model)
+    mold$blueprint$ptypes$predictors
+}
+
