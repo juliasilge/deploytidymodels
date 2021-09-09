@@ -7,12 +7,13 @@
 #' @inheritParams modelops::modelops
 #' @export
 modelops.workflow <- function(model,
-                        model_name,
-                        board,
-                        desc = NULL,
-                        metadata = list(),
-                        ptype = TRUE,
-                        versioned = TRUE) {
+                              model_name,
+                              board,
+                              ...,
+                              desc = NULL,
+                              metadata = list(),
+                              ptype = TRUE,
+                              versioned = TRUE) {
 
     if (!workflows::is_trained_workflow(model)) {
         rlang::abort("Your `model` object is not a trained workflow.")

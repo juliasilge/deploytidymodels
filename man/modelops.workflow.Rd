@@ -8,6 +8,7 @@
   model,
   model_name,
   board,
+  ...,
   desc = NULL,
   metadata = list(),
   ptype = TRUE,
@@ -22,6 +23,8 @@
 \item{board}{A pin board to store and version the \code{model}, created by
 \code{\link[pins:board_folder]{pins::board_folder()}}, \code{\link[pins:board_rsconnect]{pins::board_rsconnect()}}, or other \code{board_}
 function from the pins package.}
+
+\item{...}{Other arguments, not currently used.}
 
 \item{desc}{A text description of the model, most important for shared
 boards so that others can understand what the model is. If omitted,
