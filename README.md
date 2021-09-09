@@ -10,7 +10,9 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-project.org/package=tidymodelsdeploy)
 <!-- badges: end -->
 
-The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/) using the [modelops](https://rstudio.github.io/modelops/) framework. Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
+**This pre-release is available for feedback and experimenting.**
+
+The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/) using the [modelops](https://github.com/juliasilge/modelops) framework. Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
 
 ## Installation
 
@@ -24,7 +26,7 @@ And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("tidymodels/deploytidymodels")
+devtools::install_github("juliasilge/deploytidymodels")
 ```
 
 ## Example
@@ -55,7 +57,7 @@ library(pins)
 model_board <- board_temp()
 m <- modelops(rf_fit, "sacramento_rf", model_board)
 modelops_pin_write(m)
-#> Creating new version '20210807T050434Z-10b0d'
+#> Creating new version '20210909T204107Z-1ca39'
 ```
 
 You can **deploy** your pinned model via a [Plumber API](https://www.rplumber.io/), which can be [hosted in a variety of ways](https://www.rplumber.io/articles/hosting.html).
@@ -120,7 +122,7 @@ This project is released with a [Contributor Code of Conduct](https://contributo
 
 - For questions and discussions about tidymodels packages, modeling, and machine learning, please [post on RStudio Community](https://community.rstudio.com/new-topic?category_id=15&tags=tidymodels,question).
 
-- If you think you have encountered a bug, please [submit an issue](https://github.com/tidymodels/deploytidymodels/issues).
+- If you think you have encountered a bug, please [submit an issue](https://github.com/juliasilge/deploytidymodels/issues).
 
 - Either way, learn how to create and share a [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html) (a minimal, reproducible example), to clearly communicate about your code.
 
