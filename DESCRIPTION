@@ -30,6 +30,7 @@ Suggests:
     knitr,
     modeldata,
     parsnip,
+    ranger,
     rmarkdown,
     testthat (>= 3.0.0),
     tibble,
