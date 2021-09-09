@@ -2,8 +2,6 @@ library(pins)
 library(workflows)
 library(parsnip)
 
-b <- board_temp()
-
 rf_spec <- rand_forest(mode = "regression") %>%
     set_engine("ranger")
 
@@ -15,6 +13,7 @@ mtcars_wf <- workflow() %>%
 m <- modelops(mtcars_wf, "mtcars_ranger", b)
 
 test_that("can pin a model", {
+    b <- board_temp()
     modelops_pin_write(m)
     expect_equal(
         pin_read(b, "mtcars_ranger"),
@@ -26,6 +25,7 @@ test_that("can pin a model", {
 })
 
 test_that("default metadata for model", {
+    b <- board_temp()
     modelops_pin_write(m)
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, list())
@@ -33,6 +33,7 @@ test_that("default metadata for model", {
 })
 
 test_that("user can supply metadata for model", {
+    b <- board_temp()
     m <- modelops(mtcars_wf, "mtcars_ranger", b,
                   desc = "Random forest for mtcars",
                   metadata = list(metrics = 1:10))
@@ -43,6 +44,7 @@ test_that("user can supply metadata for model", {
 })
 
 test_that("can read a pinned model", {
+    b <- board_temp()
     modelops_pin_write(m)
     expect_equal(
         m1 <- modelops_pin_read(b, "mtcars_ranger"),
