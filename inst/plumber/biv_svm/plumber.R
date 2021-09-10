@@ -1,9 +1,11 @@
+## auto generate this file
+
 library(deploytidymodels)
 library(pins)
 library(plumber)
 
 if (FALSE) {
-    library(workflows)  ## eventually we will be able to extract all these from the model
+    library(workflows)  ## eventually extract all these from the model
     library(recipes)
     library(parsnip)
     library(LiblineaR)
@@ -11,7 +13,7 @@ if (FALSE) {
 
 model_board <- board_rsconnect()
 m <- model_board %>% modelops_pin_read("julia.silge/biv_svm")
-## stopifnot for specific plain text version/hash???
+stopifnot(m$metadata$version == "47922")
 
 #* @plumber
 function(pr) {
