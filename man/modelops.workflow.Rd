@@ -12,7 +12,7 @@
   desc = NULL,
   metadata = list(),
   ptype = TRUE,
-  versioned = TRUE
+  versioned = NULL
 )
 }
 \arguments{
@@ -39,7 +39,8 @@ The options are \code{TRUE} (the default, which stores a zero-row slice of the
 training data), \code{FALSE} (no input data prototype for checking), or a
 dataframe.}
 
-\item{versioned}{Should the model object be versioned? Defaults to \code{TRUE}.}
+\item{versioned}{Should the model object be versioned? The default, \code{NULL},
+will use the default for \code{board}.}
 }
 \description{
 A \code{\link[modelops:modelops]{modelops::modelops()}} object collects the information needed to store, version,

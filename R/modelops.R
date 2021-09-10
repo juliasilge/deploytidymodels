@@ -13,7 +13,7 @@ modelops.workflow <- function(model,
                               desc = NULL,
                               metadata = list(),
                               ptype = TRUE,
-                              versioned = TRUE) {
+                              versioned = NULL) {
 
     if (!workflows::is_trained_workflow(model)) {
         rlang::abort("Your `model` object is not a trained workflow.")
