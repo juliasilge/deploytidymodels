@@ -23,7 +23,7 @@ modelops.workflow <- function(model,
     ptype <- modelops::modelops_create_ptype(model, ptype)
 
     if (rlang::is_null(desc)) {
-        spec <- workflows::pull_workflow_spec(model)
+        spec <- workflows::extract_spec_parsnip(model)
         desc <- glue("A {spec$engine} {spec$mode} modeling workflow")
     }
 
@@ -32,7 +32,7 @@ modelops.workflow <- function(model,
         model_name = model_name,
         board = board,
         desc = as.character(desc),
-        metadata = metadata,
+        metadata = modelops::modelops_meta(metadata),
         ptype = ptype,
         versioned = versioned
     )
