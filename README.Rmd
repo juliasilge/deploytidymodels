@@ -85,7 +85,7 @@ endpoint <- modelops_endpoint("http://127.0.0.1:8088/predict")
 endpoint
 ```
 
-A model API endpoint deployed with `pr_model()` will return predictions with appropriate new data.
+A model API endpoint deployed with `modelops_pr_predict()` will return predictions with appropriate new data.
 
 ``` r
 library(tidyverse)

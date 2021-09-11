@@ -67,7 +67,7 @@ library(pins)
 model_board <- board_temp()
 m <- modelops(rf_fit, "sacramento_rf", model_board)
 modelops_pin_write(m)
-#> Creating new version '20210909T212010Z-8c62b'
+#> Creating new version '20210911T023535Z-a85c1'
 ```
 
 You can **deploy** your pinned model via a [Plumber
@@ -93,8 +93,8 @@ endpoint
 #> http://127.0.0.1:8088/predict
 ```
 
-A model API endpoint deployed with `pr_model()` will return predictions
-with appropriate new data.
+A model API endpoint deployed with `modelops_pr_predict()` will return
+predictions with appropriate new data.
 
 ``` r
 library(tidyverse)
