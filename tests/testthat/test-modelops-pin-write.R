@@ -48,8 +48,18 @@ test_that("can read a pinned model", {
     b <- board_temp()
     m <- modelops(mtcars_wf, "mtcars_ranger", b)
     modelops_pin_write(m)
+    m1 <- modelops_pin_read(b, "mtcars_ranger")
+    meta <- pin_meta(b, "mtcars_ranger")
+    expect_equal(m1$model, m$model)
+    expect_equal(m1$model_name, m$model_name)
+    expect_equal(m1$board, m$board)
+    expect_equal(m1$desc, m$desc)
     expect_equal(
-        m1 <- modelops_pin_read(b, "mtcars_ranger"),
-        m
+        m1$metadata,
+        list(user = m$metadata$user,
+             version = meta$local$version,
+             url = meta$local$url)
     )
+    expect_equal(m1$ptype, m$ptype)
+    expect_equal(m1$versioned, FALSE)
 })
