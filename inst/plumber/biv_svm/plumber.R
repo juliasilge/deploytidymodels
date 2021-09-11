@@ -11,9 +11,12 @@ if (FALSE) {
     library(LiblineaR)
 }
 
-model_board <- board_rsconnect()
-m <- model_board %>% modelops_pin_read("julia.silge/biv_svm")
+b <- board_rsconnect()
+m <- modelops_pin_read(b, "julia.silge/biv_svm")
 stopifnot(m$metadata$version == "47922")
+
+## or is it better to deploy with:
+## m <- modelops_pin_read(b, "julia.silge/biv_svm", version = "47922")
 
 #* @plumber
 function(pr) {
