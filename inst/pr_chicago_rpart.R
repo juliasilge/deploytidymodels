@@ -38,7 +38,9 @@ library(pins)
 library(plumber)
 
 model_board <- board_temp()
-m <- modelops(chicago_fit, "chicago_ridership", model_board)
+## optional custom input data prototype for API
+chicago_ptype <- chicago_small %>% slice_sample(n = 3) %>% select(-ridership)
+m <- modelops(chicago_fit, "chicago_ridership", model_board, ptype = chicago_ptype)
 modelops_pin_write(m)
 
 pr() %>%
