@@ -18,7 +18,7 @@ library(deploytidymodels)
 library(pins)
 library(plumber)
 
-model_board <- board_temp()
+model_board <- board_temp(versioned = TRUE)
 m <- modelops(rf_fit, "sacramento_rf", model_board)
 modelops_pin_write(m)
 
