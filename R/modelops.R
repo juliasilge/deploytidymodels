@@ -21,6 +21,7 @@ modelops.workflow <- function(model,
 
     model <- butcher::butcher(model)
     ptype <- modelops::modelops_create_ptype(model, ptype)
+    required_pkgs <- required_pkgs(model)  ## eventually remove unnecessary pkgs like tune?
 
     if (rlang::is_null(desc)) {
         spec <- workflows::extract_spec_parsnip(model)
@@ -32,7 +33,8 @@ modelops.workflow <- function(model,
         model_name = model_name,
         board = board,
         desc = as.character(desc),
-        metadata = modelops::modelops_meta(metadata),
+        metadata = modelops::modelops_meta(metadata,
+                                           required_pkgs = required_pkgs),
         ptype = ptype,
         versioned = versioned
     )
