@@ -3,6 +3,7 @@
 library(deploytidymodels)
 library(pins)
 library(plumber)
+library(rapidoc)
 
 if (FALSE) {
     library(workflows)  ## eventually extract all these from the model
@@ -11,12 +12,8 @@ if (FALSE) {
     library(LiblineaR)
 }
 
-b <- board_rsconnect()
-m <- modelops_pin_read(b, "julia.silge/biv_svm")
-stopifnot(m$metadata$version == "47922")
-
-## or is it better to deploy with:
-## m <- modelops_pin_read(b, "julia.silge/biv_svm", version = "47922")
+b <- board_rsconnect(auth = "auto", server = "https://colorado.rstudio.com/rsc")
+m <- modelops_pin_read(b, "julia.silge/biv_svm", version = "47922")
 
 #* @plumber
 function(pr) {
