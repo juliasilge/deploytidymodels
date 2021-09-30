@@ -32,6 +32,10 @@ modelops::handler_startup
 #' @export
 modelops::handler_predict
 
+#' @importFrom modelops modelops_write_plumber
+#' @export
+modelops::modelops_write_plumber
+
 #' @importFrom modelops api_spec
 #' @export
 modelops::api_spec

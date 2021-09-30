@@ -1,0 +1,21 @@
+library(pins)
+library(workflows)
+library(parsnip)
+
+rf_spec <- rand_forest(mode = "regression") %>%
+    set_engine("ranger")
+
+mtcars_wf <- workflow() %>%
+    add_model(rf_spec) %>%
+    add_formula(mpg ~ .) %>%
+    fit(data = mtcars)
+
+test_that("create plumber.R with packages", {
+    skip_on_cran()
+    b <- board_folder(path = "/tmp/test")
+    tmp <- tempfile()
+    m <- modelops(mtcars_wf, "mtcars_ranger", b)
+    modelops_pin_write(m)
+    modelops_write_plumber(b, "mtcars_ranger", file = tmp)
+    expect_snapshot(readr::read_lines(tmp))
+})

@@ -18,7 +18,8 @@ test_that("can pin a model", {
         pin_read(b, "mtcars_ranger"),
         list(
             model = butcher::butcher(mtcars_wf),
-            ptype = vctrs::vec_slice(tibble::as_tibble(mtcars[,2:11]), 0)
+            ptype = vctrs::vec_slice(tibble::as_tibble(mtcars[,2:11]), 0),
+            required_pkgs = required_pkgs(mtcars_wf)
         )
     )
 })
@@ -58,7 +59,8 @@ test_that("can read a pinned model", {
         m1$metadata,
         list(user = m$metadata$user,
              version = meta$local$version,
-             url = meta$local$url)
+             url = meta$local$url,
+             required_pkgs = required_pkgs(mtcars_wf))
     )
     expect_equal(m1$ptype, m$ptype)
     expect_equal(m1$versioned, FALSE)
