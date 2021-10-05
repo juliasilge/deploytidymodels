@@ -17,5 +17,5 @@ test_that("create plumber.R with packages", {
     m <- modelops(mtcars_wf, "mtcars_ranger", b)
     modelops_pin_write(m)
     modelops_write_plumber(b, "mtcars_ranger", file = tmp)
-    expect_snapshot(readr::read_lines(tmp))
+    expect_snapshot(cat(readr::read_lines(tmp), sep = "\n"))
 })

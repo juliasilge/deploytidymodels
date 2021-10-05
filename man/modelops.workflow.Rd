@@ -24,7 +24,8 @@
 \code{\link[pins:board_folder]{pins::board_folder()}}, \code{\link[pins:board_rsconnect]{pins::board_rsconnect()}}, or other \code{board_}
 function from the pins package.}
 
-\item{...}{Other arguments, not currently used.}
+\item{...}{Other method-specific arguments passed to \code{\link[modelops:modelops_create_ptype]{modelops_slice_zero()}}
+to compute an input data prototype.}
 
 \item{desc}{A text description of the model, most important for shared
 boards so that others can understand what the model is. If omitted,

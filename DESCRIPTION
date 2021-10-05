@@ -24,7 +24,6 @@ Imports:
     plumber,
     readr,
     rlang,
-    tune,
     workflows
 Suggests: 
     knitr,
