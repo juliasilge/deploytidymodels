@@ -17,7 +17,7 @@ status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-p
 The goal of deploytidymodels is to provide fluent tooling to version,
 share, and deploy a trained model
 [workflow](https://workflows.tidymodels.org/) using the
-[modelops](https://github.com/juliasilge/modelops) framework. Functions
+[vetiver](https://github.com/tidymodels/vetiver) framework. Functions
 handle both recording and checking the model’s input data prototype, and
 loading the packages needed for prediction.
 
@@ -65,9 +65,10 @@ library(deploytidymodels)
 library(pins)
 
 model_board <- board_temp()
-m <- modelops(rf_fit, "sacramento_rf", model_board)
-modelops_pin_write(m)
-#> Creating new version '20210911T023535Z-a85c1'
+m <- vetiver_model(rf_fit, "sacramento_rf", model_board)
+vetiver_pin_write(m)
+#> Creating new version '20211008T150541Z-21d32'
+#> Writing to pin 'sacramento_rf'
 ```
 
 You can **deploy** your pinned model via a [Plumber
@@ -78,7 +79,7 @@ ways](https://www.rplumber.io/articles/hosting.html).
 library(plumber)
 
 pr() %>%
-    modelops_pr_predict(m) %>%
+    vetiver_pr_predict(m) %>%
     pr_run(port = 8088)
 ```
 
@@ -86,14 +87,14 @@ Make predictions with your deployed model by creating an endpoint
 object:
 
 ``` r
-endpoint <- modelops_endpoint("http://127.0.0.1:8088/predict")
+endpoint <- vetiver_endpoint("http://127.0.0.1:8088/predict")
 endpoint
 #> 
 #> ── A model API endpoint for prediction: 
 #> http://127.0.0.1:8088/predict
 ```
 
-A model API endpoint deployed with `modelops_pr_predict()` will return
+A model API endpoint deployed with `vetiver_pr_predict()` will return
 predictions with appropriate new data.
 
 ``` r
