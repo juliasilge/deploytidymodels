@@ -40,13 +40,13 @@ library(plumber)
 model_board <- board_rsconnect()
 ## optional custom input data prototype for API
 chicago_ptype <- chicago_small %>% slice_sample(n = 3) %>% select(-ridership)
-m <- modelops(chicago_fit, "chicago_ridership", model_board)
-modelops_pin_write(m)
+v <- vetiver_model(chicago_fit, "chicago_ridership", model_board)
+vetiver_pin_write(v)
 
 pr() %>%
-    modelops_pr_predict(m, debug = TRUE) %>%
+    vetiver_pr_predict(v, debug = TRUE) %>%
     pr_run(port = 8088)
 
-# endpoint <- modelops_endpoint("http://127.0.0.1:8088/predict")
+# endpoint <- vetiver_endpoint("http://127.0.0.1:8088/predict")
 # new_chicago <- Chicago %>% slice_sample(n = 10) %>% select(-ridership)
 # predict(endpoint, new_chicago)

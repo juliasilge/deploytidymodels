@@ -19,9 +19,9 @@ library(pins)
 library(plumber)
 
 model_board <- board_temp(versioned = TRUE)
-m <- modelops(rf_fit, "sacramento_rf", model_board)
-modelops_pin_write(m)
+v <- vetiver_model(rf_fit, "sacramento_rf", model_board)
+vetiver_pin_write(v)
 
 pr() %>%
-    modelops_pr_predict(m, debug = TRUE) %>%
+    vetiver_pr_predict(v, debug = TRUE) %>%
     pr_run(port = 8088)

@@ -21,12 +21,12 @@ library(pins)
 library(plumber)
 
 model_board <- board_rsconnect()
-m <- modelops(svm_fit, "biv_svm", model_board)
-modelops_pin_write(m)
+v <- vetiver_model(svm_fit, "biv_svm", model_board)
+vetiver_pin_write(v)
 
 pr() %>%
-    modelops_pr_predict(m, type = "class", debug = TRUE) %>%
+    vetiver_pr_predict(v, type = "class", debug = TRUE) %>%
     pr_run(port = 8088)
 
-## modelops_write_plumber(model_board, "julia.silge/biv_svm")
+## vetiver_write_plumber(model_board, "julia.silge/biv_svm")
 
