@@ -15,10 +15,10 @@ test_that("default endpoint", {
     add_formula(mpg ~ .) %>%
     fit(data = mtcars)
 
-  m <- modelops(mtcars_wf, "mtcars_ranger", b)
-  modelops_pin_write(m)
+  v <- vetiver_model(mtcars_wf, "mtcars_ranger", b)
+  vetiver_pin_write(v)
 
-  p <- pr() %>% modelops_pr_predict(m)
+  p <- pr() %>% vetiver_pr_predict(v)
   ep <- p$endpoints[[1]][[1]]
   expect_equal(ep$verbs, c("POST"))
   expect_equal(ep$path, "/predict")

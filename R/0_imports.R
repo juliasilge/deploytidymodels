@@ -4,49 +4,49 @@
 
 # ------------------------------------------------------------------------------
 
-#' @import modelops
+#' @import vetiver
 
 # ------------------------------------------------------------------------------
 
-#' @importFrom modelops modelops
+#' @importFrom vetiver vetiver_model
 #' @export
-modelops::modelops
+vetiver::vetiver_model
 
-#' @importFrom modelops modelops_pin_write
+#' @importFrom vetiver vetiver_pin_write
 #' @export
-modelops::modelops_pin_write
+vetiver::vetiver_pin_write
 
-#' @importFrom modelops modelops_pin_read
+#' @importFrom vetiver vetiver_pin_read
 #' @export
-modelops::modelops_pin_read
+vetiver::vetiver_pin_read
 
-#' @importFrom modelops modelops_pr_predict
+#' @importFrom vetiver vetiver_pr_predict
 #' @export
-modelops::modelops_pr_predict
+vetiver::vetiver_pr_predict
 
-#' @importFrom modelops handler_startup
+#' @importFrom vetiver handler_startup
 #' @export
-modelops::handler_startup
+vetiver::handler_startup
 
-#' @importFrom modelops handler_predict
+#' @importFrom vetiver handler_predict
 #' @export
-modelops::handler_predict
+vetiver::handler_predict
 
-#' @importFrom modelops modelops_write_plumber
+#' @importFrom vetiver vetiver_write_plumber
 #' @export
-modelops::modelops_write_plumber
+vetiver::vetiver_write_plumber
 
-#' @importFrom modelops api_spec
+#' @importFrom vetiver api_spec
 #' @export
-modelops::api_spec
+vetiver::api_spec
 
-#' @importFrom modelops modelops_slice_zero
+#' @importFrom vetiver vetiver_slice_zero
 #' @export
-modelops::modelops_slice_zero
+vetiver::vetiver_slice_zero
 
-#' @importFrom modelops modelops_endpoint
+#' @importFrom vetiver vetiver_endpoint
 #' @export
-modelops::modelops_endpoint
+vetiver::vetiver_endpoint
 
 # ------------------------------------------------------------------------------
 

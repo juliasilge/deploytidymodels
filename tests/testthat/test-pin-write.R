@@ -12,8 +12,8 @@ mtcars_wf <- workflow() %>%
 
 test_that("can pin a model", {
     b <- board_temp()
-    m <- modelops(mtcars_wf, "mtcars_ranger", b)
-    modelops_pin_write(m)
+    v <- vetiver_model(mtcars_wf, "mtcars_ranger", b)
+    vetiver_pin_write(v)
     expect_equal(
         pin_read(b, "mtcars_ranger"),
         list(
@@ -26,8 +26,8 @@ test_that("can pin a model", {
 
 test_that("default metadata for model", {
     b <- board_temp()
-    m <- modelops(mtcars_wf, "mtcars_ranger", b)
-    modelops_pin_write(m)
+    v <- vetiver_model(mtcars_wf, "mtcars_ranger", b)
+    vetiver_pin_write(v)
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, list())
     expect_equal(meta$description, "A ranger regression modeling workflow")
@@ -35,11 +35,10 @@ test_that("default metadata for model", {
 
 test_that("user can supply metadata for model", {
     b <- board_temp()
-    m <- modelops(mtcars_wf, "mtcars_ranger", b)
-    m <- modelops(mtcars_wf, "mtcars_ranger", b,
-                  desc = "Random forest for mtcars",
-                  metadata = list(metrics = 1:10))
-    modelops_pin_write(m)
+    v <- vetiver_model(mtcars_wf, "mtcars_ranger", b,
+                       desc = "Random forest for mtcars",
+                       metadata = list(metrics = 1:10))
+    vetiver_pin_write(v)
     meta <- pin_meta(b, "mtcars_ranger")
     expect_equal(meta$user, list(metrics = 1:10))
     expect_equal(meta$description, "Random forest for mtcars")
@@ -47,21 +46,21 @@ test_that("user can supply metadata for model", {
 
 test_that("can read a pinned model", {
     b <- board_temp()
-    m <- modelops(mtcars_wf, "mtcars_ranger", b)
-    modelops_pin_write(m)
-    m1 <- modelops_pin_read(b, "mtcars_ranger")
+    v <- vetiver_model(mtcars_wf, "mtcars_ranger", b)
+    vetiver_pin_write(v)
+    v1 <- vetiver_pin_read(b, "mtcars_ranger")
     meta <- pin_meta(b, "mtcars_ranger")
-    expect_equal(m1$model, m$model)
-    expect_equal(m1$model_name, m$model_name)
-    expect_equal(m1$board, m$board)
-    expect_equal(m1$desc, m$desc)
+    expect_equal(v1$model, v$model)
+    expect_equal(v1$model_name, v$model_name)
+    expect_equal(v1$board, v$board)
+    expect_equal(v1$desc, v$desc)
     expect_equal(
-        m1$metadata,
-        list(user = m$metadata$user,
+        v1$metadata,
+        list(user = v$metadata$user,
              version = meta$local$version,
              url = meta$local$url,
              required_pkgs = c("parsnip", "ranger", "workflows"))
     )
-    expect_equal(m1$ptype, m$ptype)
-    expect_equal(m1$versioned, FALSE)
+    expect_equal(v1$ptype, v$ptype)
+    expect_equal(v1$versioned, FALSE)
 })
