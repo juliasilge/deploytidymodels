@@ -12,7 +12,8 @@ status](https://www.r-pkg.org/badges/version/tidymodelsdeploy)](https://CRAN.R-p
 [![R-CMD-check](https://github.com/juliasilge/deploytidymodels/workflows/R-CMD-check/badge.svg)](https://github.com/juliasilge/deploytidymodels/actions)
 <!-- badges: end -->
 
-**This pre-release is available for feedback and experimenting.**
+**This repo is archived in favor of the 
+[vetiver](https://github.com/tidymodels/vetiver/) package.**
 
 The goal of deploytidymodels is to provide fluent tooling to version,
 share, and deploy a trained model

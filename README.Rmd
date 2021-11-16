@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 # deploytidymodels
 
 <!-- badges: start -->
@@ -21,7 +22,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/juliasilge/deploytidymodels/workflows/R-CMD-check/badge.svg)](https://github.com/juliasilge/deploytidymodels/actions)
 <!-- badges: end -->
 
-**This pre-release is available for feedback and experimenting.**
+**This repo is archived in favor of the [vetiver](https://github.com/tidymodels/vetiver/) package.**
 
 The goal of deploytidymodels is to provide fluent tooling to version, share, and deploy a trained model [workflow](https://workflows.tidymodels.org/) using the [vetiver](https://github.com/tidymodels/vetiver) framework. Functions handle both recording and checking the model's input data prototype, and loading the packages needed for prediction.
 
